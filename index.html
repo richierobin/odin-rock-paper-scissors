@@ -2,78 +2,53 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Rock, Paper, Scissors</title>
+  <title>Rock, Paper, scissors</title>
 </head>
 <body>
   <script>
-    // Your JavaScript goes here!
-
-    function getRandomChoice() {
-      let a = (Math.floor(Math.random() * 100) + 1)
-      if (a <= 33) {
-        return "rock";
-      } else if (a >= 66) {
-        return "scissors";
-      } else {
-        return "paper";
-      }
+    //The computer randomly chooses a word from array
+    function computerChoice() {
+        let options = ["rock", "paper", "scissors"];
+        return options[Math.floor(Math.random() * options.length)];
     }
 
-    let playerInput = prompt("Rock, paper or scissors?")
-    const playerSelection = playerInput.toLowerCase()
-    const computerSelection = getRandomChoice()
+    //Input from Player with prompt method, contingency for wrong spelling
+    function playerChoice() {
+        let choice = prompt("Choose rock, paper or scissors!").toLowerCase();
+        if ((choice === "rock") || (choice === "paper") || (choice === "scissors")) {
+        return choice;
+     } else {
+       alert("You spelt it wrong so I chose rock for you!");
+       return "rock";
+     }
+    }
 
-    let playerScore = 0
-    let computerScore = 0
-    let roundWinner = ""
-
+    //Function to run the game to see who wins or if a tie
     function playRound(playerSelection, computerSelection) {
-      if (playerSelection === computerSelection) {
-        roundWinner = "tie"
-      }
-      if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "scissors" && computerSelection === "paper") ||
-        (playerSelection === "paper" && computerSelection === "rock")
-      ) {
-        playerScore++
-        roundWinner = "player"
-      }
-      if (
-        (computerSelection === "rock" && playerSelection === "scissors") ||
-        (computerSelection === "scissors" && playerSelection === "paper") ||
-        (computerSelection === "paper" && playerSelection === "rock")
-      ) {
-        computerScore++
-        roundWinner = "computer"
-      }
+        if (playerSelection === computerSelection) {
+            return "You chose " + playerSelection + " and the computer chose " + computerSelection + ". It's a tie!";
+        } else if ((playerSelection === "rock") && (computerSelection === "scissors")) {
+            return "You chose " + playerSelection + " and the computer chose " + computerSelection + ". Player wins!";
+        } else if ((playerSelection === "paper") && (computerSelection === "rock")) {
+            return "You chose " + playerSelection + " and the computer chose " + computerSelection + ". Player wins!";
+        } else if ((playerSelection === "scissors") && (computerSelection === "paper")) {
+            return "You chose " + playerSelection + " and the computer chose " + computerSelection + ". Player wins!";
+        } else {
+            return "You chose " + playerSelection + " and the computer chose " + computerSelection + ". Computer wins!";
+        }
     }
 
-    function endRoundMessage(roundWinner, playerSelection, computerSelection) {
-      if (roundWinner === "player") {
-        return capitalizeFirstLetter(playerSelection) + " beats " + computerSelection + ". Well done!"
-      }
-      if (roundWinner === "computer") {
-        return capitalizeFirstLetter(computerSelection) + " beats " + playerSelection + ". Bad luck!"
-      }
-      if (roundWinner === "tie") {
-        return "It's a tie. Play again!"
-      }
-    }
+    //Run the game five times with output or result to the console
+    function game() {
+        console.log(playRound(playerChoice(), computerChoice()));
+        console.log(playRound(playerChoice(), computerChoice()));
+        console.log(playRound(playerChoice(), computerChoice()));
+        console.log(playRound(playerChoice(), computerChoice()));
+        console.log(playRound(playerChoice(), computerChoice()));
+        return;
+        }
 
-    function showScore(playerScore, computerScore) {
-      return "Player score: " + playerScore + ", Computer score: " + computerScore;
-    }
-
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-    }
-
-    console.log("The computer chose " + computerSelection);
-    console.log("You chose " + playerSelection);
-    playRound(playerSelection, computerSelection);
-    console.log(endRoundMessage(roundWinner, playerSelection, computerSelection));
-    console.log(showScore(playerScore, computerScore));
+    game();
   </script>
 </body>
 </html>
