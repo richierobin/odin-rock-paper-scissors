@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+
+    function getRandomChoice() {
+      let a = (Math.floor(Math.random() * 100) + 1)
+      if (a <= 33) {
+        return "rock";
+      } else if (a >= 66) {
+        return "scissors";
+      } else {
+        return "paper";
+      }
+    }
+
+    let playerInput = prompt("Rock, paper or scissors?")
+    const playerSelection = playerInput.toLowerCase()
+    const computerSelection = getRandomChoice()
+
+    let playerScore = 0
+    let computerScore = 0
+    let roundWinner = ""
+
+    function playRound(playerSelection, computerSelection) {
+      if (playerSelection === computerSelection) {
+        roundWinner = "tie"
+      }
+      if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "scissors" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "rock")
+      ) {
+        playerScore++
+        roundWinner = "player"
+      }
+      if (
+        (computerSelection === "rock" && playerSelection === "scissors") ||
+        (computerSelection === "scissors" && playerSelection === "paper") ||
+        (computerSelection === "paper" && playerSelection === "rock")
+      ) {
+        computerScore++
+        roundWinner = "computer"
+      }
+    }
+
+    function endRoundMessage(roundWinner, playerSelection, computerSelection) {
+      if (roundWinner === "player") {
+        return capitalizeFirstLetter(playerSelection) + " beats " + computerSelection + ". Well done!"
+      }
+      if (roundWinner === "computer") {
+        return capitalizeFirstLetter(computerSelection) + " beats " + playerSelection + ". Bad luck!"
+      }
+      if (roundWinner === "tie") {
+        return "It's a tie. Play again!"
+      }
+    }
+
+    function showScore(playerScore, computerScore) {
+      return "Player score: " + playerScore + ", Computer score: " + computerScore;
+    }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+    }
+
+    console.log("The computer chose " + computerSelection);
+    console.log("You chose " + playerSelection);
+    playRound(playerSelection, computerSelection);
+    console.log(endRoundMessage(roundWinner, playerSelection, computerSelection));
+    console.log(showScore(playerScore, computerScore));
+  </script>
+</body>
+</html>
