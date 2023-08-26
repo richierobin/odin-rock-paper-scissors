@@ -23,6 +23,7 @@
      }
     }
 
+    //Set initial scores to zero
     let computerScore = 0;
     let playerScore = 0;
 
@@ -45,18 +46,8 @@
         }
     }
 
-/*    //Run the game five times with output or result to the console
+    //Run the game five times with output or result to the console
     function game() {
-        console.log(playRound(playerChoice(), computerChoice()));
-        console.log(playRound(playerChoice(), computerChoice()));
-        console.log(playRound(playerChoice(), computerChoice()));
-        console.log(playRound(playerChoice(), computerChoice()));
-        console.log(playRound(playerChoice(), computerChoice()));
-        return;
-        }
-*/
-
-function game() {
             for (let i = 0; i < 5; i++) {
               console.log(playRound(playerChoice(), computerChoice()));
             }
